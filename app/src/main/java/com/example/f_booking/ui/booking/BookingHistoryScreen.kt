@@ -46,6 +46,7 @@ fun BookingHistoryScreen(viewModel: BookingViewModel = viewModel()) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             // Chú ý: Cần an toàn null cho tên sân lỡ DB có lỗi mất liên kết
                             Text("Sân: ${booking.fieldId?.name ?: "Sân đã bị xóa"}", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                            Text("Mã đơn: ${booking.id}", fontSize = 12.sp, color = Color.Gray)
                             Text("Ngày: ${booking.bookingDate}")
                             Text("Giờ: ${booking.startTime} - ${booking.endTime}")
                             Text("Tổng tiền: ${booking.totalPrice}đ", color = Color(0xFF2E7D32), fontWeight = FontWeight.Bold)
