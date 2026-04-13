@@ -77,5 +77,25 @@ interface ApiService {
         @Body request: UpdateBookingStatusRequest
     ): Response<ApiResponse>
 
+    // UC_A04: Admin thêm sân mới
+    @POST("admin/fields")
+    suspend fun createField(@Body request: FieldRequest): Response<Field>
 
+    // UC_A05: Admin cập nhật thông tin sân
+    @PUT("admin/fields/{id}")
+    suspend fun updateField(@Path("id") id: String, @Body request: FieldRequest): Response<Field>
+
+    // UC_A07: Lấy danh sách đơn đặt sân (có thể lọc theo trạng thái PENDING)
+    @GET("admin/bookings")
+    suspend fun getAdminBookings(@Query("status") status: String? = null): Response<List<com.example.f_booking.model.Booking>>
+
+    // UC_A08 & UC_A09: Cập nhật trạng thái đơn (Duyệt / Từ chối)
+    @PUT("admin/bookings/{id}/status")
+    suspend fun updateBookingStatus(
+        @Path("id") id: String,
+        @Body request: com.example.f_booking.model.UpdateStatusRequest
+    ): Response<Any>
+    // UC_A10, A11, A12: Lấy dữ liệu thống kê Dashboard
+    @GET("admin/dashboard")
+    suspend fun getAdminDashboard(): Response<com.example.f_booking.model.DashboardResponse>
 }
